@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EarthTools.Net.Tests
@@ -7,8 +8,18 @@ namespace EarthTools.Net.Tests
     public class EarthToolsClientTests
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestPlaceLookupSuccess()
         {
+            EarthToolsClient cli = new EarthToolsClient();
+            var place = cli.Places.Query("Tucson, AZ");
+            Assert.IsNotNull(place);
+            Assert.AreNotEqual(0, place.Count());
+
+            var first = place.First();
+
+            Assert.AreEqual("Tucson", first.Name);
+            
+            Assert.IsNotNull(place);
         }
     }
 }
