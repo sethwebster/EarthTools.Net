@@ -18,7 +18,7 @@ namespace EarthTools.Net
 
         public IEnumerable<Place> Query(string Location)
         {
-            var client = GetClient();
+            var client = WebClientFactory.GetClient();
             var data = client.DownloadString(string.Format
                 (BaseUrlPlaces, Location));
 
@@ -62,13 +62,6 @@ namespace EarthTools.Net
                     };
 
             return d.OrderBy(p => p.Detail.Importance);
-        }
-
-        private static WebClient GetClient()
-        {
-            WebClient c = new WebClient();
-            c.Headers["User-Agent"] = "test";
-            return c;
         }
     }
 }

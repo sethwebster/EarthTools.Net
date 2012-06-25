@@ -13,7 +13,7 @@ namespace EarthTools.Net
         public static readonly string BaseUrlTimeZone = EarthToolsClient.BaseUrl + "/timezone/{0}/{1}";
         public TimeZone Query(decimal latitude, decimal longitude)
         {
-            var client = GetClient();
+            var client = WebClientFactory.GetClient();
             var data = client.DownloadString(string.Format
                 (BaseUrlTimeZone, latitude, longitude));
 
@@ -37,13 +37,5 @@ namespace EarthTools.Net
             };
             return ret;
         }
-
-        private static WebClient GetClient()
-        {
-            WebClient c = new WebClient();
-            c.Headers["User-Agent"] = "EarthTools.Net Client/1.0 (client slide C# library)";
-            return c;
-        }
-
     }
 }
