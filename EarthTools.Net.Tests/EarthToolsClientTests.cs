@@ -18,8 +18,42 @@ namespace EarthTools.Net.Tests
             var first = place.First();
 
             Assert.AreEqual("Tucson", first.Name);
-            
+
             Assert.IsNotNull(place);
+        }
+
+        [TestMethod]
+        public void TestTimeZoneLookup()
+        {
+            EarthToolsClient cli = new EarthToolsClient();
+            var timezone = cli.TimeZones.Query(32, -110);
+
+            Assert.IsNotNull(timezone);
+            Assert.AreEqual(-7, timezone.Offset);
+        }
+
+        [TestMethod]
+        public void TestFullLookup()
+        {
+            EarthToolsClient cli = new EarthToolsClient();
+
+            string city = "Tucson";
+            string state = "AZ";
+            var places = cli.Places.Query(city + ", " + state);
+
+            Assert.IsNotNull(places);
+            Assert.AreNotEqual(0, places.Count());
+
+            var first = places.First();
+
+            Assert.AreEqual(city, first.Name);
+
+            var timezone = cli.TimeZones.Query(first.Latitude, first.Longitude);
+
+            Assert.IsNotNull(timezone);
+     
+
+
         }
     }
 }

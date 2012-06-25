@@ -70,14 +70,5 @@ namespace EarthTools.Net
             c.Headers["User-Agent"] = "test";
             return c;
         }
-        private static HttpWebRequest GetClient(string Location)
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(string.Format
-                (BaseUrlPlaces, Location));
-            request.UserAgent = "EarthTools.Net.Client/1.0 (.net client library for queries)";
-
-            return request;
-        }
-
     }
 }
